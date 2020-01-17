@@ -6,6 +6,8 @@ package com.gokulPramati.tripcalculator.view.activity;
 import android.os.Bundle;
 
 import com.gokulPramati.tripcalculator.R;
+import com.gokulPramati.tripcalculator.database.DatabaseHelper;
+import com.gokulPramati.tripcalculator.model.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -13,9 +15,12 @@ import com.google.gson.Gson;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,10 +35,32 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+                // Creating tags
+                Trip trip = new Trip("Goa Trip","Goa","goa description");
+                trip.setCommonExpenditureAmount("7000");
+                long tripId= databaseHelper.addTrip(trip);
+
+
+
+                List<Trip> allTrip = databaseHelper.getAllTrip();
+                for (Trip trp : allTrip) {
+                    Log.d("Trip Name", trp.getName());
+                }
+
+
+
+
+                // Updating tag name
+                //  trip.setName("test trip");
+                //  databaseHelper.updateTrip(trip);
+
+                // Don't forget to close database connection
+                databaseHelper.closeDB();
             }
         });
+
+
     }
 
 //    @Override

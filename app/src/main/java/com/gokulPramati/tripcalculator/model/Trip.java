@@ -7,11 +7,11 @@ public class Trip {
     private String name;
     private String location;
     private String description;
-    private int id;
+    private long id;
     private String commonExpenditureAmount;
 
     /**
-     * Trip Builder
+     * Trip MemberExpenditureBuilder
      * @param name
      * @param location
      * @param description
@@ -23,10 +23,10 @@ public class Trip {
     }
 
     /**
-     * Trip Builder
+     * Trip MemberExpenditureBuilder
      * @param builder
      */
-    public Trip(Builder builder) {
+    public Trip(TripBuilder builder) {
         this.id=builder.id;
         this.name=builder.name;
         this.description = builder.description;
@@ -40,44 +40,66 @@ public class Trip {
         return description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-
+    public String getLocation() {
+        return location;
+    }
     public String getCommonExpenditureAmount() {
         return commonExpenditureAmount;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCommonExpenditureAmount(String commonExpenditureAmount) {
+        this.commonExpenditureAmount = commonExpenditureAmount;
+    }
+
     /**
-     * Builder Class
+     * MemberExpenditureBuilder Class
      */
-    public static class Builder {
+    public static class TripBuilder {
         private String name;
         private String description;
-        private int id;
+        private long id;
         private String commonExpenditureAmount;
         private String location;
 
-        public Builder name(String name) {
+        public TripBuilder name(String name) {
             this.name = name;
             return this;
         }
-        public Builder description(String description) {
+        public TripBuilder description(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder location(String location) {
+        public TripBuilder location(String location) {
             this.location = location;
             return this;
         }
-        public Builder id(int id) {
+        public TripBuilder id(int id) {
             this.id = id;
             return this;
         }
 
-        public Builder commonExpenditure(String commonExpenditure) {
-            this.commonExpenditureAmount = commonExpenditureAmount;
+        public TripBuilder commonExpenditure(String commonExpenditure) {
+            this.commonExpenditureAmount = commonExpenditure;
             return this;
         }
 
