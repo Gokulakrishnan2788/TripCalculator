@@ -15,5 +15,6 @@ public interface TripContract {
     public void setLocationError();
     public void setDescriptionError();
     public void setCommonExpenditureError();
+    public void onValidationSuccess();
 
 }

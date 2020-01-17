@@ -8,16 +8,16 @@ import com.gokulPramati.tripcalculator.model.Trip;
  */
 public class TripDataValidtionIntractor {
     Trip trip;
-    static String ALPHA_PATTERN ="[A-Z][a-z]*";
+    static String ALPHA_PATTERN ="^[a-zA-Z]+(\\s[a-zA-Z]+)?$";
     TripFieldValidationListener tripFieldValidationListener;
 
-    TripDataValidtionIntractor(TripFieldValidationListener tripFieldValidationListener){
+    public TripDataValidtionIntractor(TripFieldValidationListener tripFieldValidationListener){
         this.tripFieldValidationListener=tripFieldValidationListener;
     }
     /**
      * Validating form
      */
-    private void validateTripData(Trip trip) {
+  public void validateTripData(Trip trip) {
         this.trip=trip;
         if (!validateName()) {
             if(tripFieldValidationListener!=null){
@@ -74,7 +74,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateDescription(){
-        return trip != null && trip.getDescription() != null && trip.getName().length() > 5;
+        return trip != null && trip.getDescription() != null && trip.getDescription().length() > 5;
     }
 
     /**
@@ -83,6 +83,6 @@ public class TripDataValidtionIntractor {
      */
     private  boolean validateCommonExpenditure(){
         float amount = Float.parseFloat(trip.getCommonExpenditureAmount());
-        return trip != null && trip.getCommonExpenditureAmount() != null && amount>0;
+        return trip != null && trip.getCommonExpenditureAmount() != null && amount>=0;
     }
 }
