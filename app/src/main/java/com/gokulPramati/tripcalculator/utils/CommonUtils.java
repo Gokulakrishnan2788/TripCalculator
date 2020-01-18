@@ -1,8 +1,13 @@
 package com.gokulPramati.tripcalculator.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by Gokulakrishnan Mani on 2020-01-18.
@@ -35,4 +40,13 @@ public class CommonUtils {
         Log.e(ERROR,msg);
 
     }
+    public static void hideKeyboard(Activity activity) {
+        View v = activity.getWindow().getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+
+
 }

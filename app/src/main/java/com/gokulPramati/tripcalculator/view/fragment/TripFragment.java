@@ -35,14 +35,14 @@ import java.util.List;
 
 public class TripFragment extends Fragment implements TripContract {
 
-    DatabaseHelper databaseHelper;
-    View view;
-    TripPresenter tripPresenter;
-    TripClickListener addTripClickListener;
-    RecyclerView tripRecyclerView;
-    TripAdapter tripAdapter;
-    List<Trip> tripList = new ArrayList<>();
-    TextView noTripTv;
+    private DatabaseHelper databaseHelper;
+    private View view;
+    private TripPresenter tripPresenter;
+    private TripClickListener addTripClickListener;
+    private RecyclerView tripRecyclerView;
+    private TripAdapter tripAdapter;
+    private List<Trip> tripList = new ArrayList<>();
+    private TextView noTripTv;
     public TripFragment() {
         // Required empty public constructor
     }
@@ -128,27 +128,27 @@ public class TripFragment extends Fragment implements TripContract {
 
     @Override
     public void setTripNameError() {
-        CommonUtils.showLongToast("Invalid name", getContext());
+        CommonUtils.showLongToast(getContext().getString(R.string.invalid_name), getContext());
     }
 
     @Override
     public void setLocationError() {
-        CommonUtils.showLongToast("Invalid location", getContext());
+        CommonUtils.showLongToast(getContext().getString(R.string.invalid_location), getContext());
     }
 
     @Override
     public void setDescriptionError() {
-        CommonUtils.showLongToast("Invalid Desc", getContext());
+        CommonUtils.showLongToast(getContext().getString(R.string.invalid_desc), getContext());
     }
 
     @Override
     public void setCommonExpenditureError() {
-        CommonUtils.showLongToast("Invalid Expenditure", getContext());
+        CommonUtils.showLongToast(getContext().getString(R.string.invlaid_exp), getContext());
     }
 
     @Override
     public void onValidationSuccess(Trip trip) {
-        CommonUtils.showLongToast("Validation Success", getContext());
+        CommonUtils.showLongToast(getContext().getString(R.string.validation_su), getContext());
         tripPresenter.addTripData(trip);
     }
 

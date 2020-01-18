@@ -259,6 +259,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return tripMemberList;
     }
 
+    /**
+     * Getting Trip List
+     * */
+    public List<TripMember> getAllTripMember(int trip_id) {
+        List<TripMember> tripMemberList = new ArrayList<TripMember>();
+        String selectQuery = "SELECT  * FROM " + TABLE_TRIP_MEMBER+ " WHERE "
+                + KEY_TRIP_ID + " = " + trip_id;
+        Log.e(LOG, selectQuery);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                TripMember.TripMemberBuilder builder= new TripMember.TripMemberBuilder().
+                        id(cursor.getInt(cursor.getColumnIndex(KEY_ID))).
+                        tripId(cursor.getInt(cursor.getColumnIndex(KEY_TRIP_ID))).
+                        name(cursor.getString(cursor.getColumnIndex(KEY_NAME))).
+                        email(cursor.getString(cursor.getColumnIndex(KEY_EMAIL))).
+                        phoneNumber(cursor.getString(cursor.getColumnIndex(KEY_PHONE_NUMBER))).
+                        initialContribution(cursor.getString(cursor.getColumnIndex(KEY_INITIAL_CONTRIBUTION)));
+                TripMember tripMember = builder.build();
+                // adding to todo list
+                tripMemberList.add(tripMember);
+            } while (cursor.moveToNext());
+        }
+        return tripMemberList;
+    }
 
     /**
      * getting Trip List count

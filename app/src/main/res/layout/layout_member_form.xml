@@ -34,7 +34,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/input_name"
+                android:id="@+id/input_member_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_name"
@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20dp"
                 android:hint="Phone Number"
+                android:maxLength="13"
                 android:inputType="phone" />
 
             <EditText
@@ -66,7 +67,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/addTripButton"
+            android:id="@+id/addTripMember"
             android:layout_width="@dimen/width_100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

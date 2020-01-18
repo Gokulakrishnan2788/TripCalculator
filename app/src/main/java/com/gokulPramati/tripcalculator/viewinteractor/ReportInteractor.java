@@ -7,6 +7,7 @@ import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.ReportListener;
 import com.gokulPramati.tripcalculator.model.MemberReport;
 import com.gokulPramati.tripcalculator.model.Trip;
+import com.gokulPramati.tripcalculator.model.TripMember;
 import com.gokulPramati.tripcalculator.model.TripReport;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class ReportInteractor {
     private Trip trip;
     private TripReport tripReport;
     DatabaseHelper databaseHelper;
+    List<MemberReport> memberReports= new ArrayList<>();
+    List<TripMember> tripMembers= new ArrayList<>();
     public ReportInteractor(ReportListener reportListener){
         this.reportListener=reportListener;
     }
@@ -28,7 +31,15 @@ public class ReportInteractor {
         if(trip_id>0){
             databaseHelper=DatabaseHelper.getInstance(context);
             trip=databaseHelper.getTrip(trip_id);
-            List<MemberReport> memberReports= new ArrayList<>();
+            tripMembers= databaseHelper.getAllTripMember(trip_id);
+
+//            for(int i=0;i<tripMembers.size();i++){
+//                new MemberReport(tripMembers.get(i).getTripId(),tripMembers.get(i).getId(),tripMembers.get(i).getName(),
+//                        tripMembers.get(i).getEmail(),tripMembers.get(i).getPhoneNumber(),tripMembers.get(i).getInitialContribution(),
+//                        tripMembers.get(i).getTripId())
+//            }
+//
+
             for(int i=0;i<2;i++){
                 if(i==0){
                     MemberReport memberReport= new MemberReport(1, 1, "Raja",
