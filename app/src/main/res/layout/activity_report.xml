@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     tools:context=".view.activity.ReportActivity">
-    <RelativeLayout
-        android:background="@color/white"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -25,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_10dp"
-                    android:text="@string/trip_details"
+                    android:text="@string/trip_report"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/header_text"
                     android:textStyle="bold">
@@ -156,13 +166,43 @@
                             android:textStyle="bold"></TextView>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_10dp"
+                            android:layout_weight="4"
+                            android:text="@string/total_expenditure"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/info_label"
+                            android:textStyle="bold"></TextView>
+
+                        <TextView
+                            android:id="@+id/tripTotalExp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_10dp"
+                            android:layout_weight="6"
+                            android:gravity="right"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/info_label"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_10dp"
-                    android:text="@string/member_list"
+                    android:text="@string/member_report"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/header_text"
                     android:textStyle="bold">
@@ -178,41 +218,16 @@
                     <include
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        layout="@layout/layout_member_list_item_dark" />
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/memberDetailRv"
-                            android:layout_width="match_parent"
-                            android:nestedScrollingEnabled="false"
-                            android:layout_height="wrap_content">
-                        </androidx.recyclerview.widget.RecyclerView>
+                        layout="@layout/layout_member_report_dark" />
 
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/no_member_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/alert_text_size"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:text="@string/no_member_found_n_please_add_members_by_tapping_plus_button">
-
-                        </TextView>
-                    </RelativeLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/memberReportRv"
+                        android:layout_width="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_height="wrap_content">
+                    </androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_member"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/icn_plus" />
-
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

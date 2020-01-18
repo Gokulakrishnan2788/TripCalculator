@@ -1,3 +1,8 @@
 
+isquid:UnusedPrivateMethod{"8Remove this unused private "initialContribution" method.(œç‰üÿÿÿÿ8¾Û™“û-
 rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(À×æ½
-Ysquid:S2094"BRemove this empty class, write its code or make it an "interface".(ÎÛà
+[squid:UnusedPrivateMethodq"*Remove this unused private "email" method.(îİ¨ÿÿÿÿÿ8É»‘“û-
+Zsquid:UnusedPrivateMethodl")Remove this unused private "name" method.(¾Ã Šùÿÿÿÿ8¾Ø‹“û-
+asquid:UnusedPrivateMethodv"0Remove this unused private "phoneNumber" method.(†×ºæıÿÿÿÿ8¾Û™“û-
+Ssquid:UnusedPrivateMethodg"'Remove this unused private "id" method.(ÃßÍĞ8ƒ‰‰“û-
+Wsquid:UnusedPrivateMethodb"+Remove this unused private "tripId" method.(ğŞµè8‘‡ˆ“û-

@@ -12,7 +12,7 @@ import com.gokulPramati.tripcalculator.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private static final int UI_DELAY = 3000;
+    private static final int UI_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
 

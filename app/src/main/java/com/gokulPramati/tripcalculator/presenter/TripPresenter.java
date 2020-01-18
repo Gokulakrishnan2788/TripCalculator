@@ -1,5 +1,6 @@
 package com.gokulPramati.tripcalculator.presenter;
 
+import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.TripFieldValidationListener;
 import com.gokulPramati.tripcalculator.listener.TripListener;
 import com.gokulPramati.tripcalculator.model.Trip;
@@ -15,9 +16,11 @@ public class TripPresenter implements TripListener, TripFieldValidationListener 
     TripDataInteractor tripDataInteractor;
     TripDataValidtionIntractor tripDataValidtionIntractor;
     TripContract tripContract;
+    DatabaseHelper databaseHelper;
 
-    public TripPresenter(TripContract tripContract) {
+    public TripPresenter(TripContract tripContract, DatabaseHelper databaseHelper) {
         this.tripContract = tripContract;
+        this.databaseHelper=databaseHelper;
     }
 
     @Override
@@ -45,12 +48,13 @@ public class TripPresenter implements TripListener, TripFieldValidationListener 
     }
 
     @Override
-    public void onValidationSuccess() {
-    tripContract.onValidationSuccess();
+    public void onValidationSuccess(Trip trip) {
+    tripContract.onValidationSuccess(trip);
     }
 
     @Override
     public void onTripAdded(Trip trip) {
+        tripContract.addTrip(trip);
 
     }
 
@@ -69,5 +73,9 @@ public class TripPresenter implements TripListener, TripFieldValidationListener 
         tripDataValidtionIntractor.validateTripData(trip);
     }
 
+    public void addTripData(Trip trip){
+        tripDataInteractor= new TripDataInteractor(this,databaseHelper);
+        tripDataInteractor.addTrip(trip);
+    }
 
 }

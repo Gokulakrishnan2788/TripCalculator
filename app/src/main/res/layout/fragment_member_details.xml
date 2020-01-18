@@ -7,7 +7,6 @@
     android:clickable="true"
     tools:context=".view.activity.ReportActivity">
     <RelativeLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -49,13 +48,13 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
                             android:layout_weight="4"
-                            android:text="Trip Name"
+                            android:text="@string/member_name"
                             android:textColor="@color/white"
                             android:textSize="@dimen/info_label"
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/tripName"
+                            android:id="@+id/memberName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
@@ -79,13 +78,13 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
                             android:layout_weight="4"
-                            android:text="@string/trip_location"
+                            android:text="@string/member_email"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/info_label"
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/tripLocation"
+                            android:id="@+id/memberEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
@@ -108,13 +107,13 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
                             android:layout_weight="4"
-                            android:text="@string/trip_description"
+                            android:text="@string/member_phone_number"
                             android:textColor="@color/white"
                             android:textSize="@dimen/info_label"
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/tripDescription"
+                            android:id="@+id/memberPhone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
@@ -138,13 +137,13 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
                             android:layout_weight="4"
-                            android:text="@string/common_expeniture"
+                            android:text="@string/member_initial_pay"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/info_label"
                             android:textStyle="bold"></TextView>
 
                         <TextView
-                            android:id="@+id/tripCommExp"
+                            android:id="@+id/memberInitialPay"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_10dp"
@@ -162,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_10dp"
-                    android:text="@string/member_list"
+                    android:text="@string/member_expenditure_list"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/header_text"
                     android:textStyle="bold">
@@ -178,7 +177,7 @@
                     <include
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        layout="@layout/layout_member_list_item_dark" />
+                        layout="@layout/layout_member_expenditure_list_item_dark" />
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
@@ -206,7 +205,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_member"
+            android:id="@+id/add_expenditure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

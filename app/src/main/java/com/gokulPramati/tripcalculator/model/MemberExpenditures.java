@@ -61,22 +61,22 @@ public class MemberExpenditures {
         private String amount;
         private String description;
 
-        private MemberExpenditureBuilder tripId(int tripId) {
+        public MemberExpenditureBuilder tripId(int tripId) {
             this.tripId = tripId;
             return this;
         }
 
-        private MemberExpenditureBuilder memberId(int memberId) {
+        public MemberExpenditureBuilder memberId(int memberId) {
             this.memberId = memberId;
             return this;
         }
 
-        private MemberExpenditureBuilder amount(String amount) {
+        public MemberExpenditureBuilder amount(String amount) {
             this.amount = amount;
             return this;
         }
 
-        private MemberExpenditureBuilder description(String description) {
+        public MemberExpenditureBuilder description(String description) {
             this.description = description;
             return this;
         }

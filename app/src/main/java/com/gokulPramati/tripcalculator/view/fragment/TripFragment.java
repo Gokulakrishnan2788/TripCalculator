@@ -7,19 +7,31 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gokulPramati.tripcalculator.R;
+import com.gokulPramati.tripcalculator.adapter.ReportAdapter;
+import com.gokulPramati.tripcalculator.adapter.TripAdapter;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.presenter.TripPresenter;
+import com.gokulPramati.tripcalculator.utils.CommonUtils;
+import com.gokulPramati.tripcalculator.view.activity.HomeActivity;
+import com.gokulPramati.tripcalculator.view.activity.ReportActivity;
 import com.gokulPramati.tripcalculator.viewcontract.TripContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripFragment extends Fragment implements TripContract {
 
@@ -27,6 +39,10 @@ public class TripFragment extends Fragment implements TripContract {
     View view;
     TripPresenter tripPresenter;
     TripClickListener addTripClickListener;
+    RecyclerView tripRecyclerView;
+    TripAdapter tripAdapter;
+    List<Trip> tripList = new ArrayList<>();
+    TextView noTripTv;
     public TripFragment() {
         // Required empty public constructor
     }
@@ -50,16 +66,35 @@ public class TripFragment extends Fragment implements TripContract {
     }
 
    public void initView(){
-        tripPresenter = new TripPresenter(this);
+       DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getContext());
+        tripPresenter = new TripPresenter(this,databaseHelper);
        FloatingActionButton fab = view.findViewById(R.id.fab);
+       noTripTv=view.findViewById(R.id.no_tirp_tv);
+       tripRecyclerView=view.findViewById(R.id.tripRv);
        fab.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                addTripClickListener.onAddTripClick();
            }
        });
+       LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+       tripRecyclerView.setLayoutManager(linearLayoutManager);
+       tripRecyclerView.setItemAnimator(new DefaultItemAnimator());
+       tripList= DatabaseHelper.getInstance(getContext()).getAllTrip();
+       tripAdapter =new TripAdapter(getContext(),tripList,addTripClickListener);
+       if(tripList.isEmpty()){
+           noTripTv.setVisibility(View.VISIBLE);
+           tripRecyclerView.setVisibility(View.GONE);
+       }else{
+         showList();
+       }
+       tripRecyclerView.setAdapter(tripAdapter);
    }
 
+   public void showList(){
+       noTripTv.setVisibility(View.GONE);
+       tripRecyclerView.setVisibility(View.VISIBLE);
+   }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -74,7 +109,11 @@ public class TripFragment extends Fragment implements TripContract {
 
     @Override
     public void addTrip(Trip trip) {
-
+    CommonUtils.showLongToast("Trip Added",getContext());
+    tripList.add(trip);
+    tripAdapter.notifyDataSetChanged();
+    showList();
+    addTripClickListener.onTripAdded();
     }
 
     @Override
@@ -89,28 +128,28 @@ public class TripFragment extends Fragment implements TripContract {
 
     @Override
     public void setTripNameError() {
-        showToast("Invalid name");
+        CommonUtils.showLongToast("Invalid name", getContext());
     }
 
     @Override
     public void setLocationError() {
-        showToast("Invalid location");
+        CommonUtils.showLongToast("Invalid location", getContext());
     }
 
     @Override
     public void setDescriptionError() {
-        showToast("Invalid Desc");
+        CommonUtils.showLongToast("Invalid Desc", getContext());
     }
 
     @Override
     public void setCommonExpenditureError() {
-        showToast("Invalid Expenditure");
+        CommonUtils.showLongToast("Invalid Expenditure", getContext());
     }
 
     @Override
-    public void onValidationSuccess() {
-        showToast("Validation Success");
-        addTripClickListener.onTripAdded();
+    public void onValidationSuccess(Trip trip) {
+        CommonUtils.showLongToast("Validation Success", getContext());
+        tripPresenter.addTripData(trip);
     }
 
     public void validateTripDetails(Trip trip)
@@ -126,7 +165,5 @@ public class TripFragment extends Fragment implements TripContract {
 
     }
 
-    private  void showToast(String msg){
-        Toast.makeText(getActivity(),msg,Toast.LENGTH_LONG).show();
-    }
+
 }

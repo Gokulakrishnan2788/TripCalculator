@@ -95,32 +95,32 @@ public class TripMember {
         private String phoneNumber;
         private String initialContribution;
 
-        private TripMemberBuilder tripId(int tripId) {
+        public TripMemberBuilder tripId(int tripId) {
             this.tripId = tripId;
             return this;
         }
 
-        private TripMemberBuilder id(int id) {
+        public TripMemberBuilder id(int id) {
             this.id = id;
             return this;
         }
 
-        private TripMemberBuilder name(String name) {
+        public TripMemberBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        private TripMemberBuilder email(String email) {
+        public TripMemberBuilder email(String email) {
             this.email = email;
             return this;
         }
 
-        private TripMemberBuilder phoneNumber(String phoneNumber) {
+        public TripMemberBuilder phoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
-        private TripMemberBuilder initialContribution(String initialContribution) {
+        public TripMemberBuilder initialContribution(String initialContribution) {
             this.initialContribution = initialContribution;
             return this;
         }

@@ -11,7 +11,7 @@ public class TripDataInteractor {
     TripListener tripListener;
     DatabaseHelper databaseHelper;
 
-    TripDataInteractor(TripListener tripListener, DatabaseHelper databaseHelper) {
+    public TripDataInteractor(TripListener tripListener, DatabaseHelper databaseHelper) {
         this.tripListener = tripListener;
         this.databaseHelper = databaseHelper;
     }

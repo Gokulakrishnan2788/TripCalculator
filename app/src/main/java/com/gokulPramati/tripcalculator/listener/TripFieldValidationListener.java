@@ -10,5 +10,5 @@ public interface TripFieldValidationListener {
     public void onTripLocationError();
     public void onTripDescriptionError();
     public void onCommonExpenditureError();
-    public void onValidationSuccess();
+    public void onValidationSuccess(Trip trip);
 }

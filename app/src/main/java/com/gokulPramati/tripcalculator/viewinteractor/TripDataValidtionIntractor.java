@@ -8,7 +8,7 @@ import com.gokulPramati.tripcalculator.model.Trip;
  */
 public class TripDataValidtionIntractor {
     Trip trip;
-    static String ALPHA_PATTERN ="^[a-zA-Z]+(\\s[a-zA-Z]+)?$";
+   // static String ALPHA_PATTERN ="^[a-zA-Z]+(\\s[a-zA-Z]+)?$";
     TripFieldValidationListener tripFieldValidationListener;
 
     public TripDataValidtionIntractor(TripFieldValidationListener tripFieldValidationListener){
@@ -48,7 +48,7 @@ public class TripDataValidtionIntractor {
         }
         //success
         if(tripFieldValidationListener!=null){
-            tripFieldValidationListener.onValidationSuccess();
+            tripFieldValidationListener.onValidationSuccess(trip);
         }
 
     }
@@ -58,7 +58,8 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateName(){
-        return trip != null && trip.getName() != null && trip.getName().length() > 3 && trip.getName().matches(ALPHA_PATTERN);
+        return trip != null && (trip.getName() != null && !trip.getName().isEmpty())&& trip.getName().length() > 3;
+               // && trip.getName().matches(ALPHA_PATTERN);
     }
 
     /**
@@ -66,7 +67,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateLocation(){
-        return trip != null && trip.getLocation() != null && trip.getLocation().length() > 3 ;
+        return trip != null && (trip.getLocation() != null && !trip.getLocation().isEmpty()) && trip.getLocation().length() > 3 ;
     }
 
     /**
@@ -74,7 +75,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateDescription(){
-        return trip != null && trip.getDescription() != null && trip.getDescription().length() > 5;
+        return trip != null && (trip.getDescription() != null&& !trip.getDescription().isEmpty()) && trip.getDescription().length() > 5;
     }
 
     /**
@@ -82,7 +83,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateCommonExpenditure(){
-        float amount = Float.parseFloat(trip.getCommonExpenditureAmount());
-        return trip != null && trip.getCommonExpenditureAmount() != null && amount>=0;
+
+        return trip != null && (trip.getCommonExpenditureAmount()!=null && !trip.getCommonExpenditureAmount().isEmpty())&& Float.parseFloat(trip.getCommonExpenditureAmount())>=0;
     }
 }
