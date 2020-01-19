@@ -6,13 +6,9 @@ import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.MemberDetailListener;
 import com.gokulPramati.tripcalculator.listener.MemberDetailsFieldValidationListener;
 import com.gokulPramati.tripcalculator.model.MemberExpenditures;
-import com.gokulPramati.tripcalculator.model.TripMember;
 import com.gokulPramati.tripcalculator.viewcontract.MemberDetailContract;
-import com.gokulPramati.tripcalculator.viewcontract.TripDetailContract;
 import com.gokulPramati.tripcalculator.viewinteractor.MemberDetailDataValidationInteractor;
 import com.gokulPramati.tripcalculator.viewinteractor.MemberDetailInteractor;
-import com.gokulPramati.tripcalculator.viewinteractor.TripDetailDataInteractor;
-import com.gokulPramati.tripcalculator.viewinteractor.TripDetailDataValidationInteractor;
 
 /**
  * Created by Gokulakrishnan Mani on 2020-01-18.
@@ -57,12 +53,20 @@ public class MemberDetailPresenter implements MemberDetailListener, MemberDetail
 
     }
 
-
+    /**
+     * validate Expenditure Data
+     * @param memberExpenditures
+     */
     public void validateExpenditureData(MemberExpenditures memberExpenditures){
         memberDetailDataValidationInteractor= new MemberDetailDataValidationInteractor(this);
         memberDetailDataValidationInteractor.validateExpenditureData(memberExpenditures);
     }
 
+    /**
+     * add Expenditure
+     * @param memberExpenditures
+     * @param context
+     */
     public void addExpenditure(MemberExpenditures memberExpenditures, Context context){
         memberDetailInteractor= new MemberDetailInteractor(
                 this, DatabaseHelper.getInstance(context));

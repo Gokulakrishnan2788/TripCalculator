@@ -14,12 +14,4 @@
         android:layout_height="@dimen/splash_image_height"
         android:src="@drawable/app_logo_1">
     </ImageView>
-
-<ProgressBar
-    android:layout_centerHorizontal="true"
-    android:layout_width="@dimen/progress_bar_width"
-    android:layout_height="@dimen/progress_bar_height"
-    android:layout_below="@+id/logo">
-
-</ProgressBar>
 </RelativeLayout>

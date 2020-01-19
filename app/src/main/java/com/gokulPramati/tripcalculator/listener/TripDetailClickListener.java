@@ -6,7 +6,7 @@ import com.gokulPramati.tripcalculator.model.TripMember;
  * Created by Gokulakrishnan Mani on 2020-01-18.
  */
 public interface TripDetailClickListener {
-    public void onAddMemberClick(int trip_id);
-    public void onMemberAdded();
-    public void onMemberItemClick(TripMember tripMember);
+     void onAddMemberClick(int trip_id);
+     void onMemberAdded();
+     void onMemberItemClick(TripMember tripMember);
 }

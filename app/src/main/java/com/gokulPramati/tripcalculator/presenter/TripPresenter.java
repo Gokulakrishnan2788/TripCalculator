@@ -68,11 +68,19 @@ public class TripPresenter implements TripListener, TripFieldValidationListener 
 
     }
 
+    /**
+     * Validate trip
+     * @param trip
+     */
     public void validateTripData(Trip trip){
         tripDataValidtionIntractor= new TripDataValidtionIntractor(this);
         tripDataValidtionIntractor.validateTripData(trip);
     }
 
+    /**
+     * Add trip
+     * @param trip
+     */
     public void addTripData(Trip trip){
         tripDataInteractor= new TripDataInteractor(this,databaseHelper);
         tripDataInteractor.addTrip(trip);

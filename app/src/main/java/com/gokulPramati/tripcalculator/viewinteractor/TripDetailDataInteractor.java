@@ -2,8 +2,6 @@ package com.gokulPramati.tripcalculator.viewinteractor;
 
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.TripDetailListener;
-import com.gokulPramati.tripcalculator.listener.TripListener;
-import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.model.TripMember;
 
 /**

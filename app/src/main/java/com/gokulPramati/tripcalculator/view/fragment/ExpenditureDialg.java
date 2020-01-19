@@ -41,9 +41,6 @@ public class ExpenditureDialg extends DialogFragment {
                 dismiss();
             }
         });
-
-        // set this instance as callback for editor action
-
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         getDialog().setTitle(getResources().getString(R.string.do_you_want_to_update_common_expediture_optional));

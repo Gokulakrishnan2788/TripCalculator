@@ -6,6 +6,17 @@ package com.gokulPramati.tripcalculator.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.listener.MemberDetailClickListener;
@@ -26,18 +37,6 @@ import com.gokulPramati.tripcalculator.view.fragment.TripFragment;
 import com.gokulPramati.tripcalculator.viewcontract.ReportContract;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-
 public class HomeActivity extends BaseActivity implements TripClickListener, TripDetailClickListener,
         View.OnClickListener, MemberDetailClickListener, ReportContract {
 
@@ -48,7 +47,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
     LinearLayout layoutTripBottomSheet;
     LinearLayout layoutMemberBottomSheet;
     LinearLayout layoutExpenditureBottomSheet;
-    RelativeLayout addTripButton, addMmberButton,addExpButton;
+    RelativeLayout addTripButton, addMmberButton, addExpButton;
     TripFragment tripFragment;
     ReportPresenter reportPresenter;
     //Trip Input Fields
@@ -88,7 +87,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         expenditureSheetBehavior = BottomSheetBehavior.from(layoutExpenditureBottomSheet);
         addTripButton = findViewById(R.id.addTripButton);
         addMmberButton = findViewById(R.id.addTripMember);
-        addExpButton=findViewById(R.id.addExpenditure);
+        addExpButton = findViewById(R.id.addExpenditure);
         addTripButton.setOnClickListener(this);
         addMmberButton.setOnClickListener(this);
         addExpButton.setOnClickListener(this);
@@ -145,7 +144,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         tripDetailFragment = new TripDetailFragment();
         Fragment fragment = tripDetailFragment;
         String tripString = JsonParser.ToJsonString(trip);
-        if(tripString!=null) {
+        if (tripString != null) {
             Bundle bundl = new Bundle();
             bundl.putString(CommonUtils.TRIP_DATA, tripString);
             fragment.setArguments(bundl);
@@ -154,7 +153,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         tripDetailFragment.setTitleChangeListener(this);
 
         menuItem.setVisible(true);
-        currentTripId=trip.getId();
+        currentTripId = trip.getId();
         loadFragment(fragment);
     }
 
@@ -178,13 +177,13 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
             tripDetailFragment.validateTripMemberDetails(new TripMember.TripMemberBuilder().name(memberName)
                     .email(memberEmail)
                     .phoneNumber(memberPhone)
-                    .tripId((int)currentTripId)
+                    .tripId((int) currentTripId)
                     .initialContribution(memberInitialPay)
                     .build());
         } else if (v.getId() == R.id.addExpenditure) {
             expDesc = expenditureDescTv.getText().toString().trim();
             expAmount = expenditureAmountTv.getText().toString().trim();
-            memberDetailsFragment.validateTripMemberExpenditure(new MemberExpenditures(currentTripId,currentMemberId,expAmount,expDesc));
+            memberDetailsFragment.validateTripMemberExpenditure(new MemberExpenditures(currentTripId, currentMemberId, expAmount, expDesc));
         }
         CommonUtils.hideKeyboard(HomeActivity.this);
     }
@@ -201,17 +200,15 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-
         if (id == R.id.action_generate_report) {
 
             ExpenditureDialg dialg = new ExpenditureDialg(new ExpenditureDialg.ExpenditureDialogListener() {
                 @Override
                 public void onFinishUserDialog(String commonExpenditure) {
-                    if(commonExpenditure!=null && !commonExpenditure.isEmpty()){
+                    if (commonExpenditure != null && !commonExpenditure.isEmpty()) {
                         updateCommonExpense(commonExpenditure);
                     }
-                    generateReport((int)currentTripId);
+                    generateReport((int) currentTripId);
 
                 }
             });
@@ -295,7 +292,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
 
     @Override
     public void onAddMemberClick(int tripId) {
-        currentTripId=tripId;
+        currentTripId = tripId;
         if (memberSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
             memberSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         } else {
@@ -313,7 +310,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         memberDetailsFragment = new MemberDetailsFragment();
         Fragment fragment = memberDetailsFragment;
         String tripMemberString = JsonParser.ToJsonString(tripMember);
-        if(tripMemberString!=null) {
+        if (tripMemberString != null) {
             Bundle bundle = new Bundle();
             bundle.putString(CommonUtils.MEMBER_DATA, tripMemberString);
             fragment.setArguments(bundle);
@@ -327,7 +324,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
 
     @Override
     public void onTitleChange(String title) {
-        if(!isFinishing() && getSupportActionBar()!=null) {
+        if (!isFinishing() && getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
     }
@@ -335,8 +332,8 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
 
     @Override
     public void onAddExpenditureClick(int member_id, int trip_id) {
-        currentTripId=trip_id;
-        currentMemberId=member_id;
+        currentTripId = trip_id;
+        currentMemberId = member_id;
         if (expenditureSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
             expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         } else {
@@ -349,9 +346,9 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    public  void updateCommonExpense(String commonExp){
-        tripDetailFragment.updateCommonExpense(commonExp,(int)currentTripId);
-        tripFragment.updateCommonExpense(commonExp,(int)currentTripId);
+    public void updateCommonExpense(String commonExp) {
+        tripDetailFragment.updateCommonExpense(commonExp, (int) currentTripId);
+        tripFragment.updateCommonExpense(commonExp, (int) currentTripId);
 
     }
 }

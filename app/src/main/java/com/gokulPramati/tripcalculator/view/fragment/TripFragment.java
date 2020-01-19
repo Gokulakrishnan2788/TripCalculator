@@ -3,31 +3,25 @@ package com.gokulPramati.tripcalculator.view.fragment;
 /**
  * Created by Gokulakrishnan Mani on 2020-01-18.
  */
+
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gokulPramati.tripcalculator.R;
-import com.gokulPramati.tripcalculator.adapter.ReportAdapter;
 import com.gokulPramati.tripcalculator.adapter.TripAdapter;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
-import com.gokulPramati.tripcalculator.listener.TitleChangeListener;
 import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.presenter.TripPresenter;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
-import com.gokulPramati.tripcalculator.view.activity.HomeActivity;
-import com.gokulPramati.tripcalculator.view.activity.ReportActivity;
 import com.gokulPramati.tripcalculator.view.base.BaseFragment;
 import com.gokulPramati.tripcalculator.viewcontract.TripContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,11 +41,11 @@ public class TripFragment extends BaseFragment implements TripContract {
     private TextView noTripTv;
 
     public TripFragment() {
-        // Required empty public constructor
+
     }
 
-    public void setAddTripListener(TripClickListener addTripListener){
-       this.addTripClickListener=addTripListener;
+    public void setAddTripListener(TripClickListener addTripListener) {
+        this.addTripClickListener = addTripListener;
     }
 
     @Override
@@ -62,53 +56,54 @@ public class TripFragment extends BaseFragment implements TripContract {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(view== null)
-        view =inflater.inflate(R.layout.fragment_home, container, false);
+        if (view == null)
+            view = inflater.inflate(R.layout.fragment_home, container, false);
         initView();
 
-        return  view;
+        return view;
     }
 
-   public void initView(){
-       DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getContext());
-        tripPresenter = new TripPresenter(this,databaseHelper);
-       FloatingActionButton fab = view.findViewById(R.id.fab);
-       noTripTv=view.findViewById(R.id.no_tirp_tv);
-       tripRecyclerView=view.findViewById(R.id.tripRv);
-       fab.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               addTripClickListener.onAddTripClick();
-           }
-       });
-       LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-       tripRecyclerView.setLayoutManager(linearLayoutManager);
-       tripRecyclerView.setItemAnimator(new DefaultItemAnimator());
-       tripList= DatabaseHelper.getInstance(getContext()).getAllTrip();
-       tripAdapter =new TripAdapter(getContext(),tripList,addTripClickListener);
-       if(tripList.isEmpty()){
-           noTripTv.setVisibility(View.VISIBLE);
-           tripRecyclerView.setVisibility(View.GONE);
-       }else{
-         showList();
-       }
-       tripRecyclerView.setAdapter(tripAdapter);
-   }
+    public void initView() {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getContext());
+        tripPresenter = new TripPresenter(this, databaseHelper);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        noTripTv = view.findViewById(R.id.no_tirp_tv);
+        tripRecyclerView = view.findViewById(R.id.tripRv);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addTripClickListener.onAddTripClick();
+            }
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        tripRecyclerView.setLayoutManager(linearLayoutManager);
+        tripRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        tripList = DatabaseHelper.getInstance(getContext()).getAllTrip();
+        tripAdapter = new TripAdapter(getContext(), tripList, addTripClickListener);
+        if (tripList.isEmpty()) {
+            noTripTv.setVisibility(View.VISIBLE);
+            tripRecyclerView.setVisibility(View.GONE);
+        } else {
+            showList();
+        }
+        tripRecyclerView.setAdapter(tripAdapter);
+    }
 
-   public void showList(){
-       noTripTv.setVisibility(View.GONE);
-       tripRecyclerView.setVisibility(View.VISIBLE);
-   }
+    public void showList() {
+        noTripTv.setVisibility(View.GONE);
+        tripRecyclerView.setVisibility(View.VISIBLE);
+    }
 
-   public void updateCommonExpense(String common_exp,int tripId){
-        for(int i=0;i<tripList.size();i++){
-            if(tripList.get(i).getId()==tripId){
+    public void updateCommonExpense(String common_exp, int tripId) {
+        for (int i = 0; i < tripList.size(); i++) {
+            if (tripList.get(i).getId() == tripId) {
                 tripList.get(i).setCommonExpenditureAmount(common_exp);
                 break;
             }
         }
 
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -123,11 +118,11 @@ public class TripFragment extends BaseFragment implements TripContract {
 
     @Override
     public void addTrip(Trip trip) {
-    CommonUtils.showLongToast("Trip Added",getContext());
-    tripList.add(trip);
-    tripAdapter.notifyDataSetChanged();
-    showList();
-    addTripClickListener.onTripAdded();
+        CommonUtils.showLongToast("Trip Added", getContext());
+        tripList.add(trip);
+        tripAdapter.notifyDataSetChanged();
+        showList();
+        addTripClickListener.onTripAdded();
     }
 
     @Override
@@ -166,16 +161,15 @@ public class TripFragment extends BaseFragment implements TripContract {
         tripPresenter.addTripData(trip);
     }
 
-    public void validateTripDetails(Trip trip)
-    {
+    public void validateTripDetails(Trip trip) {
         tripPresenter.validateTripData(trip);
     }
 
-    public void navigateToTripDetails(Trip trip){
+    public void navigateToTripDetails(Trip trip) {
 
     }
 
-    public void updateTripList(){
+    public void updateTripList() {
 
     }
 

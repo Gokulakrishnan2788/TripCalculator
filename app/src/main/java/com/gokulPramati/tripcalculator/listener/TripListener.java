@@ -6,8 +6,8 @@ import com.gokulPramati.tripcalculator.model.Trip;
  * Created by Gokulakrishnan Mani on 2020-01-17.
  */
 public interface TripListener {
-    public void onTripAdded(Trip trip);
-    public void onTripUpdated(Trip trip);
-    public void onTripDeleted(Trip trip);
+     void onTripAdded(Trip trip);
+     void onTripUpdated(Trip trip);
+     void onTripDeleted(Trip trip);
 
 }

@@ -8,13 +8,13 @@ import com.gokulPramati.tripcalculator.model.Trip;
 public interface TripContract {
 
 
-    public void addTrip(Trip trip );
-    public void updateTrip(Trip trip);
-    public void deleteTrip(Trip trip);
-    public void setTripNameError();
-    public void setLocationError();
-    public void setDescriptionError();
-    public void setCommonExpenditureError();
-    public void onValidationSuccess(Trip trip);
+     void addTrip(Trip trip );
+     void updateTrip(Trip trip);
+     void deleteTrip(Trip trip);
+     void setTripNameError();
+     void setLocationError();
+     void setDescriptionError();
+     void setCommonExpenditureError();
+     void onValidationSuccess(Trip trip);
 
 }

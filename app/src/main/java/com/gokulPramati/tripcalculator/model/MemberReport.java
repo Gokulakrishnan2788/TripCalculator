@@ -64,8 +64,6 @@ public class MemberReport {
     }
 
     //getters
-
-
     public long getTripId() {
         return tripId;
     }

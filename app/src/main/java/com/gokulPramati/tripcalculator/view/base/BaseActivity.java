@@ -1,8 +1,8 @@
 package com.gokulPramati.tripcalculator.view.base;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.listener.TitleChangeListener;

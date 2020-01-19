@@ -61,18 +61,32 @@ public class TripDetailPresenter implements TripDetailListener, TripDetailFieldV
         tripDetailContract.onValidationSuccess(tripMember);
     }
 
-
+    /**
+     *
+     * @param tripMember
+     */
     public void validateMemberData(TripMember tripMember){
         tripDataValidtionIntractor= new TripDetailDataValidationInteractor(this);
         tripDataValidtionIntractor.validateTripMemberData(tripMember);
     }
 
+    /**
+     *
+     * @param tripMember
+     * @param context
+     */
     public void addMemberData(TripMember tripMember, Context context){
         tripDetailDataInteractor= new TripDetailDataInteractor(
                 this,DatabaseHelper.getInstance(context));
         tripDetailDataInteractor.addMember(tripMember);
     }
 
+    /**
+     *
+     * @param commonExp
+     * @param tripId
+     * @param context
+     */
     public void updateCommonExpense(String commonExp,int tripId,Context context){
         tripDetailDataInteractor= new TripDetailDataInteractor(
                 this,DatabaseHelper.getInstance(context));

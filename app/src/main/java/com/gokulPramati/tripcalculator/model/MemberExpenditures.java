@@ -4,6 +4,7 @@ package com.gokulPramati.tripcalculator.model;
  * Created by Gokulakrishnan Mani on 2020-01-18.
  */
 public class MemberExpenditures {
+
     private long tripId;
     private long memberId;
     private long id;
@@ -57,6 +58,9 @@ public class MemberExpenditures {
         this.description = description;
     }
 
+    /**
+     * Builder Class
+     */
     public static class MemberExpenditureBuilder {
         private long id;
         private long tripId;

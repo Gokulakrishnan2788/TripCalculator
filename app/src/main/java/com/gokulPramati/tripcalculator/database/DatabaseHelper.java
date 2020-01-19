@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import static com.gokulPramati.tripcalculator.database.DatabaseConstant.CREATE_TABLE_MEMBER_EXPENDITURE;
 import static com.gokulPramati.tripcalculator.database.DatabaseConstant.CREATE_TABLE_TRIP;
 import static com.gokulPramati.tripcalculator.database.DatabaseConstant.CREATE_TABLE_TRIP_MEMBER;
@@ -47,12 +48,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper mInstance = null;
 
     public static DatabaseHelper getInstance(Context ctx) {
-        /**
-         * use the application context as suggested by CommonsWare.
-         * this will ensure that you dont accidentally leak an Activitys
-         * context (see this article for more information:
-         * http://android-developers.blogspot.nl/2009/01/avoiding-memory-leaks.html)
-         */
         if (mInstance == null) {
             mInstance = new DatabaseHelper(ctx.getApplicationContext());
         }

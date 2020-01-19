@@ -4,34 +4,25 @@ package com.gokulPramati.tripcalculator.view.fragment;
  * Created by Gokulakrishnan Mani on 2020-01-18.
  */
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.adapter.MemberAdapter;
-import com.gokulPramati.tripcalculator.adapter.TripAdapter;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
-import com.gokulPramati.tripcalculator.listener.TitleChangeListener;
-import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.listener.TripDetailClickListener;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.model.TripMember;
 import com.gokulPramati.tripcalculator.presenter.TripDetailPresenter;
-import com.gokulPramati.tripcalculator.presenter.TripPresenter;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
 import com.gokulPramati.tripcalculator.utils.JsonParser;
-import com.gokulPramati.tripcalculator.view.activity.HomeActivity;
 import com.gokulPramati.tripcalculator.view.base.BaseFragment;
 import com.gokulPramati.tripcalculator.viewcontract.TripDetailContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -71,8 +62,6 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
     }
 
     public void initView() {
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getContext());
-
         Bundle bundle = getArguments();
         currentTrip = null;
         if (bundle != null) {
@@ -90,7 +79,7 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
         tripCommonExpTv = view.findViewById(R.id.tripCommExp);
         if (currentTrip != null) {
             setTripData(currentTrip);
-            memberList = DatabaseHelper.getInstance(getContext()).getAllTripMember((int)currentTrip.getId());
+            memberList = DatabaseHelper.getInstance(getContext()).getAllTripMember((int) currentTrip.getId());
         }
         tripDetailPresenter = new TripDetailPresenter(this);
         FloatingActionButton fab = view.findViewById(R.id.add_member);
@@ -99,7 +88,7 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tripDetailClickListener.onAddMemberClick((int)currentTrip.getId());
+                tripDetailClickListener.onAddMemberClick((int) currentTrip.getId());
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
@@ -131,11 +120,13 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
     public void validateTripMemberDetails(TripMember tripMember) {
         tripDetailPresenter.validateMemberData(tripMember);
     }
-   public void updateCommonExpense(String commonExp,int tripId){
-       tripDetailPresenter.updateCommonExpense(commonExp,tripId,getActivity());
-       currentTrip.setCommonExpenditureAmount(commonExp);
-       tripCommonExpTv.setText(commonExp);
-   }
+
+    public void updateCommonExpense(String commonExp, int tripId) {
+        tripDetailPresenter.updateCommonExpense(commonExp, tripId, getActivity());
+        currentTrip.setCommonExpenditureAmount(commonExp);
+        tripCommonExpTv.setText(commonExp);
+    }
+
     @Override
     public void addMember(TripMember tripMember) {
         CommonUtils.showLongToast("Member Added", getContext());
@@ -143,7 +134,6 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
         memberAdapter.notifyDataSetChanged();
         showList();
         tripDetailClickListener.onMemberAdded();
-
     }
 
     @Override
@@ -186,6 +176,6 @@ public class TripDetailFragment extends BaseFragment implements TripDetailContra
     @Override
     public void onResume() {
         super.onResume();
-       titleChangeListener.onTitleChange(getString(R.string.trip_details));
+        titleChangeListener.onTitleChange(getString(R.string.trip_details));
     }
 }

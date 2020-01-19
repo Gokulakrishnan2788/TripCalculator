@@ -1,22 +1,16 @@
 package com.gokulPramati.tripcalculator.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gokulPramati.tripcalculator.R;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private static final int UI_DELAY = 300;
-    private final Handler mHideHandler = new Handler();
-    private View mContentView;
-
-
+    private static final int UI_DELAY = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

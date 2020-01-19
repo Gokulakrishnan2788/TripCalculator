@@ -1,7 +1,5 @@
 package com.gokulPramati.tripcalculator.utils;
 
-import android.content.Context;
-
 import org.junit.Test;
 
 /**

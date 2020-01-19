@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
-
 /**
  * Created by Gokulakrishnan Mani on 2020-01-18.
  */
@@ -19,7 +17,11 @@ public class CommonUtils {
     public static final String INFO="INFO:";
     public static final String ERROR="ERROR:";
 
-
+    /**
+     * Show Long Toast
+     * @param msg
+     * @param context
+     */
     public static void showLongToast(String msg, Context context){
         Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
 
@@ -41,6 +43,11 @@ public class CommonUtils {
         Log.e(ERROR,msg);
 
     }
+
+    /**
+     * Hide keyboard
+     * @param activity
+     */
     public static void hideKeyboard(Activity activity) {
         View v = activity.getWindow().getCurrentFocus();
         if (v != null) {
