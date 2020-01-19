@@ -141,6 +141,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
 
     @Override
     public void onTriItemClick(Trip trip) {
+        collapseTripDetailSheet();
         tripDetailFragment = new TripDetailFragment();
         Fragment fragment = tripDetailFragment;
         String tripString = JsonParser.ToJsonString(trip);
@@ -350,5 +351,11 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
         tripDetailFragment.updateCommonExpense(commonExp, (int) currentTripId);
         tripFragment.updateCommonExpense(commonExp, (int) currentTripId);
 
+    }
+
+    public void collapseTripDetailSheet(){
+        if(tripSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            tripSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
     }
 }

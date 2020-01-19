@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/icn_plus" />
 
