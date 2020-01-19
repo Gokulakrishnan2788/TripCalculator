@@ -46,4 +46,9 @@
     <string name="invalid_email">Invalid Email</string>
     <string name="invalid_phone">Invalid PhoneNumber</string>
     <string name="invalid_contir">Invlid InitialContribution</string>
+    <string name="trip_list">Trips</string>
+    <string name="invalid_amount">Invalid Amount</string>
+    <string name="no_expenditure_found_please_tap_plus_button_to_add_expenditures">No Expenditure Found, Please Tap Plus Button to Add Expenditures!!</string>
+    <string name="proceed">Proceed</string>
+    <string name="do_you_want_to_update_common_expediture_optional">Do You Want to Update Common Expediture(Optional)?</string>
 </resources>

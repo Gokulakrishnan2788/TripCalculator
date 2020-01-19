@@ -21,19 +21,21 @@ import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.adapter.ReportAdapter;
 import com.gokulPramati.tripcalculator.adapter.TripAdapter;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
+import com.gokulPramati.tripcalculator.listener.TitleChangeListener;
 import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.presenter.TripPresenter;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
 import com.gokulPramati.tripcalculator.view.activity.HomeActivity;
 import com.gokulPramati.tripcalculator.view.activity.ReportActivity;
+import com.gokulPramati.tripcalculator.view.base.BaseFragment;
 import com.gokulPramati.tripcalculator.viewcontract.TripContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TripFragment extends Fragment implements TripContract {
+public class TripFragment extends BaseFragment implements TripContract {
 
     private DatabaseHelper databaseHelper;
     private View view;
@@ -43,6 +45,7 @@ public class TripFragment extends Fragment implements TripContract {
     private TripAdapter tripAdapter;
     private List<Trip> tripList = new ArrayList<>();
     private TextView noTripTv;
+
     public TripFragment() {
         // Required empty public constructor
     }
@@ -50,6 +53,7 @@ public class TripFragment extends Fragment implements TripContract {
     public void setAddTripListener(TripClickListener addTripListener){
        this.addTripClickListener=addTripListener;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +99,16 @@ public class TripFragment extends Fragment implements TripContract {
        noTripTv.setVisibility(View.GONE);
        tripRecyclerView.setVisibility(View.VISIBLE);
    }
+
+   public void updateCommonExpense(String common_exp,int tripId){
+        for(int i=0;i<tripList.size();i++){
+            if(tripList.get(i).getId()==tripId){
+                tripList.get(i).setCommonExpenditureAmount(common_exp);
+                break;
+            }
+        }
+
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -165,5 +179,9 @@ public class TripFragment extends Fragment implements TripContract {
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        titleChangeListener.onTitleChange(getString(R.string.trip_list));
+    }
 }

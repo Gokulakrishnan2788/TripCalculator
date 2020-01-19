@@ -72,4 +72,10 @@ public class TripDetailPresenter implements TripDetailListener, TripDetailFieldV
                 this,DatabaseHelper.getInstance(context));
         tripDetailDataInteractor.addMember(tripMember);
     }
+
+    public void updateCommonExpense(String commonExp,int tripId,Context context){
+        tripDetailDataInteractor= new TripDetailDataInteractor(
+                this,DatabaseHelper.getInstance(context));
+        tripDetailDataInteractor.updateCommonExpense(commonExp,tripId);
+    }
 }

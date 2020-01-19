@@ -22,6 +22,7 @@ import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.adapter.MemberAdapter;
 import com.gokulPramati.tripcalculator.adapter.TripAdapter;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
+import com.gokulPramati.tripcalculator.listener.TitleChangeListener;
 import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.listener.TripDetailClickListener;
 import com.gokulPramati.tripcalculator.model.Trip;
@@ -30,12 +31,14 @@ import com.gokulPramati.tripcalculator.presenter.TripDetailPresenter;
 import com.gokulPramati.tripcalculator.presenter.TripPresenter;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
 import com.gokulPramati.tripcalculator.utils.JsonParser;
+import com.gokulPramati.tripcalculator.view.activity.HomeActivity;
+import com.gokulPramati.tripcalculator.view.base.BaseFragment;
 import com.gokulPramati.tripcalculator.viewcontract.TripDetailContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class TripDetailFragment extends Fragment implements TripDetailContract {
+public class TripDetailFragment extends BaseFragment implements TripDetailContract {
 
     View view;
     TripDetailPresenter tripDetailPresenter;
@@ -76,6 +79,7 @@ public class TripDetailFragment extends Fragment implements TripDetailContract {
             String tripString = bundle.getString(CommonUtils.TRIP_DATA);
             if (tripString != null) {
                 currentTrip = JsonParser.ToObject(tripString, Trip.class);
+
             }
         }
 
@@ -127,7 +131,11 @@ public class TripDetailFragment extends Fragment implements TripDetailContract {
     public void validateTripMemberDetails(TripMember tripMember) {
         tripDetailPresenter.validateMemberData(tripMember);
     }
-
+   public void updateCommonExpense(String commonExp,int tripId){
+       tripDetailPresenter.updateCommonExpense(commonExp,tripId,getActivity());
+       currentTrip.setCommonExpenditureAmount(commonExp);
+       tripCommonExpTv.setText(commonExp);
+   }
     @Override
     public void addMember(TripMember tripMember) {
         CommonUtils.showLongToast("Member Added", getContext());
@@ -173,5 +181,11 @@ public class TripDetailFragment extends Fragment implements TripDetailContract {
         CommonUtils.showLongToast(getContext().getString(R.string.validation_su), getContext());
         tripDetailPresenter.addMemberData(tripMember, getActivity());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+       titleChangeListener.onTitleChange(getString(R.string.trip_details));
     }
 }

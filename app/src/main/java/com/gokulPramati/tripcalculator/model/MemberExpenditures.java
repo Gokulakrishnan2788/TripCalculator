@@ -6,10 +6,11 @@ package com.gokulPramati.tripcalculator.model;
 public class MemberExpenditures {
     private long tripId;
     private long memberId;
+    private long id;
     private String amount;
     private String description;
 
-    public MemberExpenditures(int tripId, int memberId, String amount, String description) {
+    public MemberExpenditures(long tripId, long memberId, String amount, String description) {
         this.tripId = tripId;
         this.memberId = memberId;
         this.amount = amount;
@@ -17,6 +18,7 @@ public class MemberExpenditures {
     }
 
     public MemberExpenditures(MemberExpenditureBuilder builder) {
+        this.id=builder.id;
         this.tripId = builder.tripId;
         this.memberId = builder.memberId;
         this.amount = builder.amount;
@@ -56,17 +58,22 @@ public class MemberExpenditures {
     }
 
     public static class MemberExpenditureBuilder {
+        private long id;
         private long tripId;
         private long memberId;
         private String amount;
         private String description;
 
-        public MemberExpenditureBuilder tripId(int tripId) {
+        public MemberExpenditureBuilder id(long id) {
+            this.id = id;
+            return this;
+        }
+        public MemberExpenditureBuilder tripId(long tripId) {
             this.tripId = tripId;
             return this;
         }
 
-        public MemberExpenditureBuilder memberId(int memberId) {
+        public MemberExpenditureBuilder memberId(long memberId) {
             this.memberId = memberId;
             return this;
         }
@@ -84,5 +91,13 @@ public class MemberExpenditures {
         public MemberExpenditures build() {
             return new MemberExpenditures(this);
         }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

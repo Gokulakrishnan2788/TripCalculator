@@ -46,4 +46,8 @@ public class TripDetailDataInteractor {
             tripDetailListener.onMemberDeleted(tripMember);
         }
     }
+    public void updateCommonExpense(String commonExp,int tripId){
+        databaseHelper.updateCommonExpenditure(commonExp,tripId);
+    }
+
 }

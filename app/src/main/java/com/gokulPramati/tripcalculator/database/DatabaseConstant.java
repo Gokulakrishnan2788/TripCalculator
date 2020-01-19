@@ -61,7 +61,7 @@ public class DatabaseConstant {
 
     // Member Expenditure table create statement
     static final String CREATE_TABLE_MEMBER_EXPENDITURE = "CREATE TABLE "
-            + TABLE_MEMBER_EXPENDITURE + "(" + KEY_TRIP_ID + " INTEGER," + KEY_MEMBER_ID + " INTEGER,"
+            + TABLE_MEMBER_EXPENDITURE + "(" + KEY_ID + " INTEGER PRIMARY KEY,"+ KEY_TRIP_ID + " INTEGER," + KEY_MEMBER_ID + " INTEGER,"
             + KEY_AMOUNT + " TEXT," + KEY_DESCRIPTION + " TEXT,"
             + KEY_CREATED_AT + " DATETIME" + ")";
 

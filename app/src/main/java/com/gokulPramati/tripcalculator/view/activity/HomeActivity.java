@@ -8,21 +8,24 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.gokulPramati.tripcalculator.R;
+import com.gokulPramati.tripcalculator.listener.MemberDetailClickListener;
 import com.gokulPramati.tripcalculator.listener.TripClickListener;
 import com.gokulPramati.tripcalculator.listener.TripDetailClickListener;
+import com.gokulPramati.tripcalculator.model.MemberExpenditures;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.model.TripMember;
 import com.gokulPramati.tripcalculator.model.TripReport;
 import com.gokulPramati.tripcalculator.presenter.ReportPresenter;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
 import com.gokulPramati.tripcalculator.utils.JsonParser;
+import com.gokulPramati.tripcalculator.view.base.BaseActivity;
+import com.gokulPramati.tripcalculator.view.fragment.ExpenditureDialg;
 import com.gokulPramati.tripcalculator.view.fragment.MemberDetailsFragment;
 import com.gokulPramati.tripcalculator.view.fragment.TripDetailFragment;
 import com.gokulPramati.tripcalculator.view.fragment.TripFragment;
 import com.gokulPramati.tripcalculator.viewcontract.ReportContract;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,8 +38,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class HomeActivity extends AppCompatActivity implements TripClickListener, TripDetailClickListener,
-        View.OnClickListener, ReportContract {
+public class HomeActivity extends BaseActivity implements TripClickListener, TripDetailClickListener,
+        View.OnClickListener, MemberDetailClickListener, ReportContract {
+
     FrameLayout fragmentContainer;
     BottomSheetBehavior tripSheetBehavior;
     BottomSheetBehavior memberSheetBehavior;
@@ -44,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
     LinearLayout layoutTripBottomSheet;
     LinearLayout layoutMemberBottomSheet;
     LinearLayout layoutExpenditureBottomSheet;
-    RelativeLayout addTripButton, addMmberButton;
+    RelativeLayout addTripButton, addMmberButton,addExpButton;
     TripFragment tripFragment;
     ReportPresenter reportPresenter;
     //Trip Input Fields
@@ -54,13 +58,16 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
     EditText memberNameTv, memberEmailTv, memberPhoneTv, memberInitialPayTv;
     String memberName, memberEmail, memberPhone, memberInitialPay;
 
-    //Expenditure Input Fields
-    EditText expDescTv, expAmountTv;
+    //Expend Input Fields
+    EditText expenditureDescTv;
+    EditText expenditureAmountTv;
     String expDesc, expAmount;
 
     TripDetailFragment tripDetailFragment;
+    MemberDetailsFragment memberDetailsFragment;
     MenuItem menuItem;
-    int currentTripId;
+    long currentTripId;
+    long currentMemberId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +79,6 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
     }
 
     public void initView() {
-        // databaseAction();
         fragmentContainer = findViewById(R.id.fragmentContainer);
         layoutTripBottomSheet = findViewById(R.id.trip_bottom_sheet);
         layoutMemberBottomSheet = findViewById(R.id.member_bottom_sheet);
@@ -82,8 +88,10 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
         expenditureSheetBehavior = BottomSheetBehavior.from(layoutExpenditureBottomSheet);
         addTripButton = findViewById(R.id.addTripButton);
         addMmberButton = findViewById(R.id.addTripMember);
+        addExpButton=findViewById(R.id.addExpenditure);
         addTripButton.setOnClickListener(this);
         addMmberButton.setOnClickListener(this);
+        addExpButton.setOnClickListener(this);
         reportPresenter = new ReportPresenter(this);
 
         //Trip Field Initialization
@@ -98,10 +106,15 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
         memberPhoneTv = findViewById(R.id.input_phone);
         memberInitialPayTv = findViewById(R.id.input_initial_pay);
 
+        //Expenditure Field Initialization
+        expenditureDescTv = findViewById(R.id.input_exp_desc);
+        expenditureAmountTv = findViewById(R.id.input_amount);
+
         //load TripFragment
         tripFragment = new TripFragment();
         Fragment fragment = tripFragment;
         tripFragment.setAddTripListener(this);
+        tripFragment.setTitleChangeListener(this);
         loadFragment(fragment);
     }
 
@@ -138,15 +151,15 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
             fragment.setArguments(bundl);
         }
         tripDetailFragment.setAddTripListDetailListener(this);
+        tripDetailFragment.setTitleChangeListener(this);
+
         menuItem.setVisible(true);
+        currentTripId=trip.getId();
         loadFragment(fragment);
     }
 
     @Override
     public void onClick(View v) {
-        /**
-         * manually opening / closing bottom sheet on button click
-         */
         if (v.getId() == R.id.addTripButton) {
             tripName = tripNameTv.getText().toString().trim();
             tripLocation = tripLocationTv.getText().toString().trim();
@@ -165,17 +178,13 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
             tripDetailFragment.validateTripMemberDetails(new TripMember.TripMemberBuilder().name(memberName)
                     .email(memberEmail)
                     .phoneNumber(memberPhone)
-                    .tripId(currentTripId)
+                    .tripId((int)currentTripId)
                     .initialContribution(memberInitialPay)
                     .build());
         } else if (v.getId() == R.id.addExpenditure) {
-//            tripName = tripNameTv.getText().toString().trim();
-//            tripLocation = tripLocationTv.getText().toString().trim();
-//            tripDesc = tripDescTv.getText().toString().trim();
-//            commonExp = commonExpenditureTv.getText().toString().trim();
-//
-//            tripFragment.validateTripMemberDetails(new Trip.TripBuilder().name(tripName).location(tripLocation).
-//                    description(tripDesc).commonExpenditure(commonExp).build());
+            expDesc = expenditureDescTv.getText().toString().trim();
+            expAmount = expenditureAmountTv.getText().toString().trim();
+            memberDetailsFragment.validateTripMemberExpenditure(new MemberExpenditures(currentTripId,currentMemberId,expAmount,expDesc));
         }
         CommonUtils.hideKeyboard(HomeActivity.this);
     }
@@ -195,7 +204,18 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
 
 
         if (id == R.id.action_generate_report) {
-            generateReport(currentTripId);
+
+            ExpenditureDialg dialg = new ExpenditureDialg(new ExpenditureDialg.ExpenditureDialogListener() {
+                @Override
+                public void onFinishUserDialog(String commonExpenditure) {
+                    if(commonExpenditure!=null && !commonExpenditure.isEmpty()){
+                        updateCommonExpense(commonExpenditure);
+                    }
+                    generateReport((int)currentTripId);
+
+                }
+            });
+            dialg.show(getSupportFragmentManager(), "");
             return true;
         }
 
@@ -242,6 +262,7 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
                 memberSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
                 getSupportFragmentManager().popBackStack();
+                onTitleChange(getString(R.string.trip_list));
                 menuItem.setVisible(false);
             }
         } else if (fragment instanceof MemberDetailsFragment) {
@@ -249,6 +270,7 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
                 expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
                 getSupportFragmentManager().popBackStack();
+                onTitleChange(getString(R.string.trip_details));
             }
         }
 
@@ -288,6 +310,48 @@ public class HomeActivity extends AppCompatActivity implements TripClickListener
 
     @Override
     public void onMemberItemClick(TripMember tripMember) {
+        memberDetailsFragment = new MemberDetailsFragment();
+        Fragment fragment = memberDetailsFragment;
+        String tripMemberString = JsonParser.ToJsonString(tripMember);
+        if(tripMemberString!=null) {
+            Bundle bundle = new Bundle();
+            bundle.putString(CommonUtils.MEMBER_DATA, tripMemberString);
+            fragment.setArguments(bundle);
+        }
+        memberDetailsFragment.setMemberDetailListener(this);
+        memberDetailsFragment.setTitleChangeListener(this);
+        menuItem.setVisible(false);
+        loadFragment(fragment);
+
+    }
+
+    @Override
+    public void onTitleChange(String title) {
+        if(!isFinishing() && getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
+
+
+    @Override
+    public void onAddExpenditureClick(int member_id, int trip_id) {
+        currentTripId=trip_id;
+        currentMemberId=member_id;
+        if (expenditureSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+            expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        } else {
+            expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+    }
+
+    @Override
+    public void onExpenditureAdded() {
+        expenditureSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    public  void updateCommonExpense(String commonExp){
+        tripDetailFragment.updateCommonExpense(commonExp,(int)currentTripId);
+        tripFragment.updateCommonExpense(commonExp,(int)currentTripId);
 
     }
 }

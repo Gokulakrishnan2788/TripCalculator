@@ -27,7 +27,9 @@ public class MemberReport {
         this.refundOrBalancePay = refundOrBalancePay;
         this.commonExp=commonExp;
     }
+    public MemberReport(){
 
+    }
     //Setters
     public void setTripId(long tripId) {
         this.tripId = tripId;

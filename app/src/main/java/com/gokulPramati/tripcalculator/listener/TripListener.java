@@ -9,4 +9,5 @@ public interface TripListener {
     public void onTripAdded(Trip trip);
     public void onTripUpdated(Trip trip);
     public void onTripDeleted(Trip trip);
+
 }

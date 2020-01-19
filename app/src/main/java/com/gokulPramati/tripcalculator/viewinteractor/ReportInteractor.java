@@ -5,6 +5,7 @@ import android.content.Context;
 import com.gokulPramati.tripcalculator.R;
 import com.gokulPramati.tripcalculator.database.DatabaseHelper;
 import com.gokulPramati.tripcalculator.listener.ReportListener;
+import com.gokulPramati.tripcalculator.model.MemberExpenditures;
 import com.gokulPramati.tripcalculator.model.MemberReport;
 import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.model.TripMember;
@@ -28,35 +29,26 @@ public class ReportInteractor {
     }
     
     public void generateReport(Context context, int trip_id){
-        if(trip_id>0){
+        if(trip_id>=0){
             databaseHelper=DatabaseHelper.getInstance(context);
             trip=databaseHelper.getTrip(trip_id);
             tripMembers= databaseHelper.getAllTripMember(trip_id);
-
-//            for(int i=0;i<tripMembers.size();i++){
-//                new MemberReport(tripMembers.get(i).getTripId(),tripMembers.get(i).getId(),tripMembers.get(i).getName(),
-//                        tripMembers.get(i).getEmail(),tripMembers.get(i).getPhoneNumber(),tripMembers.get(i).getInitialContribution(),
-//                        tripMembers.get(i).getTripId())
-//            }
-//
-
-            for(int i=0;i<2;i++){
-                if(i==0){
-                    MemberReport memberReport= new MemberReport(1, 1, "Raja",
-                            "raja@gmail.com", "9943251796", "5000",
-                            "8500","3500", "0");
-                    memberReports.add(memberReport);
-                }else if(i==1){
-                    MemberReport memberReport= new MemberReport(1, 2, "Rghu",
-                            "raja@gmail.com", "9943251796", "8000",
-                            "6500","3500", "1000");
-                    memberReports.add(memberReport);
-                }else{
-                    MemberReport memberReport= new MemberReport(1, 2, "balu",
-                            "raja@gmail.com", "9943251796", "8000",
-                            "6500","3500", "1000");
-                    memberReports.add(memberReport);
-                }
+            float commonShare= Float.parseFloat(trip.getCommonExpenditureAmount())/tripMembers.size();
+            for(int i=0;i<tripMembers.size();i++){
+                MemberReport memberReport =new MemberReport();
+                memberReport.setName(tripMembers.get(i).getName());
+                memberReport.setTripId(tripMembers.get(i).getTripId());
+                memberReport.setMemberId(tripMembers.get(i).getId());
+                memberReport.setEmail(tripMembers.get(i).getEmail());
+                memberReport.setPhoneNumber(tripMembers.get(i).getPhoneNumber());
+                memberReport.setInitialContribution(tripMembers.get(i).getInitialContribution());
+                memberReport.setCommonExp(String.valueOf(commonShare));
+                float otherExp = getTotalExp(trip_id,tripMembers.get(i).getId());
+                float totalExp= commonShare+otherExp;
+                memberReport.setTotalExpenditure(String.valueOf(totalExp));
+                float balancepay= Float.parseFloat(tripMembers.get(i).getInitialContribution())-(totalExp);
+                memberReport.setRefundOrBalancePay(String.valueOf(balancepay));
+                memberReports.add(memberReport);
             }
             tripReport  = new TripReport(memberReports);
             reportListener.onReportReady(trip,tripReport);
@@ -65,5 +57,19 @@ public class ReportInteractor {
         }
         
 
+    }
+
+
+    public float getTotalExp(long trip_id,long member_id){
+        float totalExp=0.0f;
+        List<MemberExpenditures> expenditures= databaseHelper.getAllTripMemberExpenditure(trip_id,member_id);
+       try {
+           for (int i = 0; i < expenditures.size(); i++) {
+               totalExp = totalExp + Float.parseFloat(expenditures.get(i).getAmount());
+           }
+       }catch (Exception e){
+
+       }
+        return totalExp;
     }
 }

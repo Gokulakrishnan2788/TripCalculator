@@ -58,7 +58,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateName(){
-        return trip != null && (trip.getName() != null && !trip.getName().isEmpty())&& trip.getName().length() > 3;
+        return trip != null && (trip.getName() != null && !trip.getName().isEmpty())&& trip.getName().length() > 2;
                // && trip.getName().matches(ALPHA_PATTERN);
     }
 
@@ -67,7 +67,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateLocation(){
-        return trip != null && (trip.getLocation() != null && !trip.getLocation().isEmpty()) && trip.getLocation().length() > 3 ;
+        return trip != null && (trip.getLocation() != null && !trip.getLocation().isEmpty()) && trip.getLocation().length() >2 ;
     }
 
     /**
@@ -75,7 +75,7 @@ public class TripDataValidtionIntractor {
      * @return
      */
     private  boolean validateDescription(){
-        return trip != null && (trip.getDescription() != null&& !trip.getDescription().isEmpty()) && trip.getDescription().length() > 5;
+        return trip != null && (trip.getDescription() != null&& !trip.getDescription().isEmpty()) && trip.getDescription().length() > 2;
     }
 
     /**

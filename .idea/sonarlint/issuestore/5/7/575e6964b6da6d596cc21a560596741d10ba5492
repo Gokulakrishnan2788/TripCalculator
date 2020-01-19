@@ -1,5 +1,17 @@
 
-Fsquid:S1185"(Remove this method to simply inherit it.(ßìê¯8Ï¯Ã©ú-
-_squid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è8øËÃ©ú-
-\squid:UselessImportCheck",Remove this unused import 'android.net.Uri'.(òêû‘ıÿÿÿÿ8øËÃ©ú-
+Vsquid:S1481I"3Remove this unused "databaseHelper" local variable.(¿ì¿«şÿÿÿÿ8Şã°Ãû-
+Psquid:S16591"-Declare "tripCommonExpTv" on a separate line.(ÍëÉ†ûÿÿÿÿ8âÁÇû-
+„squid:UselessImportCheck"YRemove this unused import 'com.gokulPramati.tripcalculator.listener.TitleChangeListener'.(—ªæë8™ÌòØû-
+Ksquid:S16591"(Declare "tripDescTv" on a separate line.(ÍëÉ†ûÿÿÿÿ8âÁÇû-
+~squid:UselessImportCheck"TRemove this unused import 'com.gokulPramati.tripcalculator.presenter.TripPresenter'.(”±¯8ï‰²Ãû-
+Fsquid:S11855"(Remove this method to simply inherit it.(ßìê¯8Ï¯Ã©ú-
+_squid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è8øËÃ©ú-
+Osquid:S16591",Declare "tripLocationTv" on a separate line.(ÍëÉ†ûÿÿÿÿ8âÁÇû-
 wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(’ÄÎéşÿÿÿÿ
+‡squid:UselessImportCheck"WRemove this unused import 'com.gokulPramati.tripcalculator.listener.TripClickListener'.(ğ£½ñÿÿÿÿÿ8¢ùÀÃû-
+esquid:S1854I"BRemove this useless assignment to local variable "databaseHelper".(¿ì¿«şÿÿÿÿ8Şã°Ãû-
+{squid:UselessImportCheck"PRemove this unused import 'com.gokulPramati.tripcalculator.adapter.TripAdapter'.(Ëƒ¦İ8Ì×Ãû-
+¥squid:S1186‘"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ñÄûüùÿÿÿÿ8×…ŸÃû-
+ squid:S1186–"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(°é¥æ8Ÿ³ÈÅû-
+\squid:UselessImportCheck",Remove this unused import 'android.net.Uri'.(òêû‘ıÿÿÿÿ8øËÃ©ú-
+ksquid:UselessImportCheck";Remove this unused import 'androidx.fragment.app.Fragment'.(‚Š©“ùÿÿÿÿ8ãÆØ×û-

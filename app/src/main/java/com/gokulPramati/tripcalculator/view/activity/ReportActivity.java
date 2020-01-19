@@ -19,8 +19,9 @@ import com.gokulPramati.tripcalculator.model.Trip;
 import com.gokulPramati.tripcalculator.model.TripReport;
 import com.gokulPramati.tripcalculator.utils.CommonUtils;
 import com.gokulPramati.tripcalculator.utils.JsonParser;
+import com.gokulPramati.tripcalculator.view.base.BaseActivity;
 
-public class ReportActivity extends AppCompatActivity {
+public class ReportActivity extends BaseActivity {
 
   TextView tripNameTv,tripLocationTv,tripDescTv,commonExpenditureTv,totalExpTv;
     String tripName,tripLocation,tripDesc,commonExp,totalExp;

@@ -62,7 +62,7 @@ public class TripDetailDataValidationInteractor {
      * @return
      */
     private  boolean validateName(){
-        return tripMember != null && (tripMember.getName() != null && !tripMember.getName().isEmpty())&& tripMember.getName().length() > 3;
+        return tripMember != null && (tripMember.getName() != null && !tripMember.getName().isEmpty())&& tripMember.getName().length() >=3;
 
     }
 

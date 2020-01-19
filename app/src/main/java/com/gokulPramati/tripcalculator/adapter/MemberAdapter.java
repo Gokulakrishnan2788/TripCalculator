@@ -73,6 +73,7 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return tripMembers.size();
     }
+
     @Override
     public int getItemViewType(int position) {
         return position;

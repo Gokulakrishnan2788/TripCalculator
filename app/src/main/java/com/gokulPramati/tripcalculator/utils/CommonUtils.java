@@ -15,6 +15,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class CommonUtils {
     public static final String TRIP_DATA="trip_data";
     public static final String REPORT_DATA="report_data";
+    public static final String MEMBER_DATA="member_data";
     public static final String INFO="INFO:";
     public static final String ERROR="ERROR:";
 

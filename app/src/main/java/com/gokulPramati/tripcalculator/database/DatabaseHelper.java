@@ -171,13 +171,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, trip.getName());
         values.put(KEY_LOCATION, trip.getLocation());
-        values.put(KEY_CREATED_AT, trip.getDescription());
+        values.put(KEY_DESCRIPTION, trip.getDescription());
         values.put(KEY_CREATED_AT, trip.getCommonExpenditureAmount());
         // updating row
         return db.update(TABLE_TRIP, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(trip.getId()) });
     }
-
+    /**
+     * Updating a Trip
+     */
+    public int updateCommonExpenditure(String commonExp,int trip_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_COMMON_EXPENDITURE, commonExp);
+        // updating tripId
+        return db.update(TABLE_TRIP, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(trip_id) });
+    }
     /**
      * Deleting a Trip
      */
@@ -194,7 +204,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Add a Trip
+     * Add a MEMBER
      */
     public long addMember(TripMember tripMember) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -210,11 +220,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Get Trip by Id
+     * Get MEMBER by Id
      */
     public TripMember getMember(long trip_id,long member_id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT  * FROM " + TABLE_TRIP + " WHERE "
+        String selectQuery = "SELECT  * FROM " + TABLE_TRIP_MEMBER + " WHERE "
                 + KEY_ID + " = " + member_id + " AND " + KEY_TRIP_ID + " = " + trip_id;
         Log.e(LOG, selectQuery);
 
@@ -232,7 +242,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Getting Trip List
+     * Getting MEMBER List
      * */
     public List<TripMember> getAllMember() {
         List<TripMember> tripMemberList = new ArrayList<TripMember>();
@@ -260,7 +270,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Getting Trip List
+     * Getting MEMBER List
      * */
     public List<TripMember> getAllTripMember(int trip_id) {
         List<TripMember> tripMemberList = new ArrayList<TripMember>();
@@ -289,7 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * getting Trip List count
+     * getting MEMBER List count
      */
     public int getMemberListCount() {
         String countQuery = "SELECT  * FROM " + TABLE_TRIP_MEMBER;
@@ -302,7 +312,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Updating a Trip
+     * Updating a MEMBER
      */
     public int updateMember(TripMember tripMember) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -314,16 +324,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_INITIAL_CONTRIBUTION, tripMember.getInitialContribution());
         values.put(KEY_CREATED_AT, getDateTime());
         // updating row
-        return db.update(TABLE_TRIP, values, KEY_ID + " = ?",
+        return db.update(TABLE_TRIP_MEMBER, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(tripMember.getId()) });
     }
 
     /**
-     * Deleting a Trip
+     * Deleting a MEMBER
      */
     public void deleteMember(long trip_id,long member_id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_TRIP, KEY_ID + " = ?",
+        db.delete(TABLE_TRIP_MEMBER, KEY_ID + " = ?",
                 new String[] { String.valueOf(trip_id) });
     }
 
@@ -334,7 +344,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Add a Trip
+     * Add a expenditure
      */
     public long addExpenditure(MemberExpenditures memberExpenditures) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -349,12 +359,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Get Trip by Id
+     * Get expend by Id
      */
-    public MemberExpenditures getExpenditure(long trip_id,long member_id) {
+    public MemberExpenditures getExpenditure(long exp_id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT  * FROM " + TABLE_TRIP + " WHERE "
-                + KEY_TRIP_ID + " = " + trip_id +" AND "+ KEY_MEMBER_ID+ " = " + member_id;
+        String selectQuery = "SELECT  * FROM " + TABLE_MEMBER_EXPENDITURE + " WHERE "
+                + KEY_ID + " = " + exp_id;
         Log.e(LOG, selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -362,6 +372,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
         MemberExpenditures.MemberExpenditureBuilder builder= new MemberExpenditures.MemberExpenditureBuilder().
                 tripId(cursor.getInt(cursor.getColumnIndex(KEY_TRIP_ID))).
+                id(cursor.getInt(cursor.getColumnIndex(KEY_ID))).
                 memberId(cursor.getInt(cursor.getColumnIndex(KEY_MEMBER_ID))).
                 description(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION))).
                 amount(cursor.getString(cursor.getColumnIndex(KEY_AMOUNT)));
@@ -370,7 +381,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Getting Trip List
+     * getAll Trip member expenditure
+     * @param trip_id
+     * @param member_id
+     * @return
+     */
+    public List<MemberExpenditures> getAllTripMemberExpenditure(long trip_id,long member_id) {
+        List<MemberExpenditures> memberExpendituresList = new ArrayList<MemberExpenditures>();
+        String selectQuery = "SELECT  * FROM " + TABLE_MEMBER_EXPENDITURE + " WHERE "
+                + KEY_TRIP_ID + " = " + trip_id +" AND "+ KEY_MEMBER_ID+ " = " + member_id;
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                MemberExpenditures.MemberExpenditureBuilder builder= new MemberExpenditures.MemberExpenditureBuilder().
+                        tripId(cursor.getInt(cursor.getColumnIndex(KEY_TRIP_ID))).
+                        id(cursor.getInt(cursor.getColumnIndex(KEY_ID))).
+                        memberId(cursor.getInt(cursor.getColumnIndex(KEY_MEMBER_ID))).
+                        description(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION))).
+                        amount(cursor.getString(cursor.getColumnIndex(KEY_AMOUNT)));
+                MemberExpenditures memberExpenditures = builder.build();
+                // adding to  list
+                memberExpendituresList.add(memberExpenditures);
+            } while (cursor.moveToNext());
+        }
+
+        return memberExpendituresList;
+    }
+
+
+    /**
+     * Getting Expenditure List
      * */
     public List<MemberExpenditures> getAllExpenditure() {
         List<MemberExpenditures> memberExpendituresList = new ArrayList<MemberExpenditures>();
@@ -386,6 +431,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 MemberExpenditures.MemberExpenditureBuilder builder= new MemberExpenditures.MemberExpenditureBuilder().
                         tripId(cursor.getInt(cursor.getColumnIndex(KEY_TRIP_ID))).
+                        id(cursor.getInt(cursor.getColumnIndex(KEY_ID))).
                         memberId(cursor.getInt(cursor.getColumnIndex(KEY_MEMBER_ID))).
                         description(cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION))).
                         amount(cursor.getString(cursor.getColumnIndex(KEY_AMOUNT)));
@@ -400,7 +446,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * getting Trip List count
+     * getting exp List count
      */
     public int getExpenditureListCount() {
         String countQuery = "SELECT  * FROM " + TABLE_MEMBER_EXPENDITURE;
@@ -413,7 +459,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Updating a Trip
+     * Updating a exp
      */
     public int updateExpenditure(MemberExpenditures memberExpenditures) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -424,19 +470,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_AMOUNT, memberExpenditures.getAmount());
         values.put(KEY_CREATED_AT, getDateTime());
         // updating row
-        return db.update(TABLE_TRIP, values, KEY_ID + " = ?",
+        return db.update(TABLE_MEMBER_EXPENDITURE, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(memberExpenditures.getMemberId()) });
     }
 
     /**
-     * Deleting a Trip
+     * Deleting a exp
      */
-//    public void deleteExpenditure(long trip_id) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_TRIP, KEY_ID + " = ?",
-//                new String[] { String.valueOf(trip_id) });
-//    }
-
+    public void deleteExpenditure(long exp_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_MEMBER_EXPENDITURE, KEY_ID + " = ?",
+                new String[] { String.valueOf(exp_id) });
+    }
 
 
     // closing database
@@ -455,12 +500,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Date date = new Date();
         return dateFormat.format(date);
     }
-
-
-
-
-
-
-
 
 }
