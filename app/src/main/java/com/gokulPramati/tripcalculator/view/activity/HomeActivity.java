@@ -269,6 +269,7 @@ public class HomeActivity extends BaseActivity implements TripClickListener, Tri
             } else {
                 getSupportFragmentManager().popBackStack();
                 onTitleChange(getString(R.string.trip_details));
+                menuItem.setVisible(true);
             }
         }
 
