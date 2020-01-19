@@ -1,5 +1,3 @@
 
-Nsquid:S1068"0Remove this unused "mContentView" private field.(ðÚ³ë8¥“»¨ú-
-Msquid:S1068"0Remove this unused "mHideHandler" private field.(ä†Êc8øþ·¨ú-
-esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(©ˆà
+esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(©ˆà
 rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ë××„

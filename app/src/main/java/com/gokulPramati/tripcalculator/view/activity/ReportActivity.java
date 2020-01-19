@@ -60,12 +60,25 @@ public class ReportActivity extends BaseActivity {
         tripLocationTv.setText(trip.getLocation());
         tripDescTv.setText(trip.getDescription());
         commonExpenditureTv.setText(trip.getCommonExpenditureAmount());
-        // totalExpTv.setText(trip.get);
+        float totalExp = getTotalExp();
+        totalExpTv.setText(String.valueOf(totalExp));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         memberReportRv.setLayoutManager(linearLayoutManager);
         memberReportRv.setItemAnimator(new DefaultItemAnimator());
         reportAdapter = new ReportAdapter(ReportActivity.this, tripReport);
         memberReportRv.setAdapter(reportAdapter);
+    }
+
+    public float getTotalExp() {
+        float totalExp = 0.0f;
+        try {
+            for (int i = 0; i < tripReport.getMemberReports().size(); i++) {
+                totalExp += Float.parseFloat(tripReport.getMemberReports().get(i).getTotalExpenditure());
+            }
+        }catch (Exception e){
+
+        }
+        return totalExp;
     }
 
     @Override
