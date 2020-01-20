@@ -1,23 +1,23 @@
 
-Isquid:S16599"+Declare "memberPhoneTv" on a separate line.(Š«­¼8­¬…Äû-
-Jsquid:S16596",Declare "tripLocationTv" on a separate line.(íğú¥8ÙÉÄ±û-
-Fsquid:S16596"(Declare "tripDescTv" on a separate line.(íğú¥8ÙÉÄ±û-
-Lsquid:S1659:")Declare "memberPhone" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
-Jsquid:S1659?"'Declare "expAmount" on a separate line.(‹Ü†ùÿÿÿÿ8š”‰Äû-
-hsquid:S4201™"IRemove this unnecessary null check; "instanceof" returns false for nulls.(¸ÌÅŞ8šŞğÆû-
-Msquid:S16597"*Declare "tripLocation" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
-qsquid:S00117ß"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë»Šª8šŞğÆû-
-qsquid:S00117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ô×ò8×Ù´Üû-
-Msquid:S16592"*Declare "addExpButton" on a separate line.(©°¨‡úÿÿÿÿ8÷ÓëÜû-
-Jsquid:S16597"'Declare "commonExp" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
-Osquid:S16592",Declare "addMmberButton" on a separate line.(©°¨‡úÿÿÿÿ8²°ëÅû-
-Qsquid:S1659:".Declare "memberInitialPay" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
 Isquid:S16599"+Declare "memberEmailTv" on a separate line.(Š«­¼8­¬…Äû-
 Nsquid:S16599"0Declare "memberInitialPayTv" on a separate line.(Š«­¼8­¬…Äû-
-qsquid:S00117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ô×ò8×Ù´Üû-
-asquid:S1126™"BReplace this if-then-else statement by a single method invocation.(¸ÌÅŞ8šŞğÆû-
-qsquid:MaximumInheritanceDepth("<This class has 7 parents which is greater than 5 authorized.(¬ƒ¹îúÿÿÿÿ8‘Š¤Øû-
-Isquid:S16597"&Declare "tripDesc" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
-Lsquid:S1659:")Declare "memberEmail" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
 rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ë××„
+Fsquid:S16596"(Declare "tripDescTv" on a separate line.(íğú¥8ÙÉÄ±û-
+Jsquid:S16597"'Declare "commonExp" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
+hsquid:S4201™"IRemove this unnecessary null check; "instanceof" returns false for nulls.(¸ÌÅŞ8šŞğÆû-
+qsquid:S00117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ô×ò8×Ù´Üû-
+Osquid:S16592",Declare "addMmberButton" on a separate line.(©°¨‡úÿÿÿÿ8²°ëÅû-
+Jsquid:S1659?"'Declare "expAmount" on a separate line.(‹Ü†ùÿÿÿÿ8š”‰Äû-
 Osquid:S16596"1Declare "commonExpenditureTv" on a separate line.(íğú¥8ÙÉÄ±û-
+Jsquid:S16596",Declare "tripLocationTv" on a separate line.(íğú¥8ÙÉÄ±û-
+Lsquid:S1659:")Declare "memberPhone" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
+Isquid:S16597"&Declare "tripDesc" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
+qsquid:S00117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ô×ò8×Ù´Üû-
+qsquid:S00117ß"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë»Šª8šŞğÆû-
+Isquid:S16599"+Declare "memberPhoneTv" on a separate line.(Š«­¼8­¬…Äû-
+qsquid:MaximumInheritanceDepth("<This class has 7 parents which is greater than 5 authorized.(¬ƒ¹îúÿÿÿÿ8‘Š¤Øû-
+Qsquid:S1659:".Declare "memberInitialPay" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
+Lsquid:S1659:")Declare "memberEmail" on a separate line.(–è†ùÿÿÿÿ8­¬…Äû-
+Msquid:S16597"*Declare "tripLocation" on a separate line.(Ä£‹Ğşÿÿÿÿ8¼ôÏ±û-
+Msquid:S16592"*Declare "addExpButton" on a separate line.(©°¨‡úÿÿÿÿ8÷ÓëÜû-
+asquid:S1126™"BReplace this if-then-else statement by a single method invocation.(¸ÌÅŞ8šŞğÆû-
