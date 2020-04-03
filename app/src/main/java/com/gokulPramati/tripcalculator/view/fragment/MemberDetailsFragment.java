@@ -64,7 +64,6 @@ public class MemberDetailsFragment extends BaseFragment implements MemberDetailC
                 tripMember = JsonParser.ToObject(tripString, TripMember.class);
             }
         }
-
         memberNameTv = view.findViewById(R.id.memberName);
         memberEmailTv = view.findViewById(R.id.memberEmail);
         memberPhoneTv = view.findViewById(R.id.memberPhone);
